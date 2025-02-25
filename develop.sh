@@ -2,8 +2,8 @@
 
 #Run migrations to ensure the database is updated
 npx medusa db:migrate --skip-links
+npx medusa build
 
-yarn build
-
-#Start development environment
-yarn start
+cd ./.medusa/server
+npm install
+npm run start
