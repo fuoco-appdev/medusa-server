@@ -4,6 +4,5 @@
 npx medusa db:migrate --skip-links
 npx medusa build
 
-cd ./.medusa/server
-npm install
-npm run start
+(cd ./.medusa/server && npm install)
+(cd ./.medusa/server && npm run start)
