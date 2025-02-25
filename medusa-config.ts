@@ -1,6 +1,6 @@
 import { loadEnv, defineConfig, Modules } from "@medusajs/framework/utils";
 
-loadEnv(process.env.NODE_ENV || "development", process.cwd());
+loadEnv(process.env.NODE_ENV || "production", process.cwd());
 
 // CORS when consuming Medusa from admin
 const ADMIN_CORS = process.env.ADMIN_CORS || "http://localhost:9000";

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 #Run migrations to ensure the database is updated
 npx medusa db:migrate --skip-links
