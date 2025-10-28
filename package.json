@@ -18,24 +18,17 @@
     "start": "medusa start",
     "dev": "medusa develop",
     "test:integration:http": "TEST_TYPE=integration:http NODE_OPTIONS=--experimental-vm-modules jest --silent=false --runInBand --forceExit",
-    "test:integration:modules": "TEST_TYPE=integration:modules NODE_OPTIONS=--experimental-vm-modules jest --silent --runInBand --forceExit",
+    "test:integration:modules": "TEST_TYPE=integration:modules NODE_OPTIONS=--experimental-vm-modules jest --silent=false --runInBand --forceExit",
     "test:unit": "TEST_TYPE=unit NODE_OPTIONS=--experimental-vm-modules jest --silent --runInBand --forceExit"
   },
   "dependencies": {
-    "@medusajs/admin-sdk": "^2.11.1",
-    "@medusajs/cli": "^2.11.1",
-    "@medusajs/framework": "^2.11.1",
-    "@medusajs/medusa": "^2.11.1",
-    "@mikro-orm/core": "6.4.16",
-    "@mikro-orm/knex": "6.4.16",
-    "@mikro-orm/migrations": "6.4.16",
-    "@mikro-orm/postgresql": "6.4.16",
-    "awilix": "^12.0.5",
-    "pg": "^8.16.3"
+    "@medusajs/admin-sdk": "2.11.1",
+    "@medusajs/cli": "2.11.1",
+    "@medusajs/framework": "2.11.1",
+    "@medusajs/medusa": "2.11.1"
   },
   "devDependencies": {
-    "@medusajs/test-utils": "^2.11.1",
-    "@mikro-orm/cli": "6.4.16",
+    "@medusajs/test-utils": "2.11.1",
     "@swc/core": "1.5.7",
     "@swc/jest": "^0.2.36",
     "@types/jest": "^29.5.13",
