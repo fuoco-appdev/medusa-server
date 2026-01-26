@@ -6,7 +6,7 @@ const PaymentSessionBodySchema = z.object({
   payment_collection_id: z.string().min(1, "Payment collection id is required"),
   provider_id: z.string().min(1, "Provider id is required"),
   currency_code: z.string().min(1, "Currency code is required"),
-  amount: z.number().int("Amount is required").positive("Amount must be positive"),
+  amount: z.number().positive("Amount must be positive"),
   data: z.object<Record<string, any>>({}).optional()
 });
 
