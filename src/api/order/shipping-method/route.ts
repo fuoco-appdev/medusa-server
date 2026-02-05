@@ -6,7 +6,7 @@ const ShippingMethodBodySchema = z.object({
   order_id: z.string().min(1, "Order id is required"),
   shipping_option_id: z.string().min(1, "Shipping option id is required"),
   name: z.string().min(1, "Name is required"),
-  amount: z.number().positive("Amount must be positive"),
+  amount: z.number(),
 });
 
 export async function POST(req: MedusaRequest, res: MedusaResponse) {
