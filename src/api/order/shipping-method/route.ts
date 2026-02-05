@@ -26,11 +26,7 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     relations: ["shipping_methods"],
   });
 
-  if (!order.shipping_methods?.length) {
-    return res.status(400).json({ message: "Order has no shipping methods" });
-  }
-
-  for (const method of order.shipping_methods) {
+  for (const method of order.shipping_methods ?? []) {
     await orderService.deleteOrderShippingMethods(method.id);
   }
 
@@ -41,9 +37,5 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
     amount: amount,
   });
 
-  const updatedOrder = await orderService.retrieveOrder(order_id, {
-    relations: ["shipping_methods"],
-  });
-
-  res.json({ order: updatedOrder });
+  res.json({ order_id: order.id });
 }
