@@ -38,7 +38,12 @@ export default async function orderReturnReceivedHandler({ event, container }) {
   const order = returnObj.order;
 
   // 1. Load template from CDN
-  const templateUrl = process.env.ORDER_RETURN_RECEIVED_TEMPLATE_URL!;
+  const templateUrl = process.env.ORDER_RETURN_RECEIVED_TEMPLATE_URL;
+  if (!templateUrl) {
+    console.error("ORDER_RETURN_RECEIVED_TEMPLATE_URL is not set");
+    return;
+  }
+
   const template = await getTemplate(templateUrl);
 
   // 2. Prepare SendGrid-style template variables

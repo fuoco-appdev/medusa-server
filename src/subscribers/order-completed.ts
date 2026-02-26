@@ -33,7 +33,13 @@ export default async function orderCompletedHandler({ event, container }) {
   const order = event.data;
 
   // 1. Load template from CDN
-  const templateUrl = process.env.ORDER_COMPLETED_TEMPLATE_URL!;
+  const templateUrl = process.env.ORDER_COMPLETED_TEMPLATE_URL;
+
+  if (!templateUrl) {
+    console.error("ORDER_COMPLETED_TEMPLATE_URL is not set");
+    return;
+  }
+
   const template = await getTemplate(templateUrl);
 
   // 2. Build SendGrid-compatible template variables

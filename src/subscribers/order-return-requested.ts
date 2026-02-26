@@ -39,7 +39,12 @@ export default async function orderReturnRequestedHandler({
   const order = returnRequest.order;
 
   // 1. Load remote template (cached)
-  const templateUrl = process.env.ORDER_RETURN_REQUESTED_TEMPLATE_URL!;
+  const templateUrl = process.env.ORDER_RETURN_REQUESTED_TEMPLATE_URL;
+  if (!templateUrl) {
+    console.error("ORDER_RETURN_REQUESTED_TEMPLATE_URL is not set");
+    return;
+  }
+
   const template = await getTemplate(templateUrl);
 
   // 2. Prepare SendGrid-style variables

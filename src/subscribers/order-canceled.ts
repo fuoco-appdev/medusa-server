@@ -31,7 +31,12 @@ export default async function orderCanceledHandler({ event, container }) {
 
   const order = event.data;
 
-  const templateUrl = process.env.ORDER_CANCELED_TEMPLATE_URL!;
+  const templateUrl = process.env.ORDER_CANCELED_TEMPLATE_URL;
+
+  if (!templateUrl) {
+    console.error("ORDER_CANCELED_TEMPLATE_URL is not set");
+    return;
+  }
 
   const template = await getTemplate(templateUrl);
 

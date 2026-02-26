@@ -32,7 +32,11 @@ export default async function orderShippedHandler({ event, container }) {
   const fulfillment = event.data;
   const order = fulfillment.order;
 
-  const templateUrl = process.env.ORDER_SHIPPED_TEMPLATE_URL!;
+  const templateUrl = process.env.ORDER_SHIPPED_TEMPLATE_URL;
+  if (!templateUrl) {
+    console.error("ORDER_SHIPPED_TEMPLATE_URL is not set");
+    return;
+  }
 
   const template = await getTemplate(templateUrl);
 
