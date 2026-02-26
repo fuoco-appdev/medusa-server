@@ -31,7 +31,7 @@ export default async function orderPlacedHandler({ event, container }) {
 
   const order = event.data;
 
-  const templateUrl = process.env.ORDER_CONFIRMATION_TEMPLATE_URL!;
+  const templateUrl = process.env.ORDER_PLACED_TEMPLATE_URL!;
 
   const template = await getTemplate(templateUrl);
 
