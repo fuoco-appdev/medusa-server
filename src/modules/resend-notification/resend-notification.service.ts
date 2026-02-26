@@ -6,8 +6,6 @@ type Options = {
 };
 
 export default class ResendNotificationProvider {
-  static identifier = "resend";
-
   protected resend: Resend;
   protected options: Options;
 

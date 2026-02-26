@@ -1,5 +1,6 @@
 import { SubscriberConfig } from "@medusajs/framework";
 import { SubscriberArgs } from "@medusajs/medusa";
+import { RESEND_NOTIFICATION_MODULE } from "../modules/resend-notification";
 
 let cachedTemplate: string | null = null;
 
@@ -31,7 +32,7 @@ export default async function orderReturnRequestedHandler({
   container,
 }) {
   const notificationModuleService = container.resolve(
-    "notificationModuleService",
+    RESEND_NOTIFICATION_MODULE,
   );
 
   // Medusa sends a return object

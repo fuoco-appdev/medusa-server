@@ -1,5 +1,6 @@
 import { SubscriberConfig } from "@medusajs/framework";
 import { SubscriberArgs } from "@medusajs/medusa";
+import { RESEND_NOTIFICATION_MODULE } from "../modules/resend-notification";
 
 let cachedTemplate: string | null = null;
 async function getTemplate(url: string) {
@@ -27,7 +28,7 @@ function get(obj: any, path: string) {
 
 export default async function orderCompletedHandler({ event, container }) {
   const notificationModuleService = container.resolve(
-    "notificationModuleService",
+    RESEND_NOTIFICATION_MODULE,
   );
 
   const order = event.data;

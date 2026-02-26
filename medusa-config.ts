@@ -29,6 +29,9 @@ const modules = [
       ],
     },
   },
+  {
+    resolve: "./src/modules/resend-notification",
+  },
 ];
 
 module.exports = defineConfig({

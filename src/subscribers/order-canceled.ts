@@ -1,4 +1,5 @@
 import { SubscriberConfig } from "@medusajs/framework";
+import { RESEND_NOTIFICATION_MODULE } from "../modules/resend-notification";
 
 function get(obj: any, path: string) {
   return path.split(".").reduce((acc, part) => acc?.[part], obj);
@@ -26,7 +27,7 @@ async function getTemplate(url: string) {
 
 export default async function orderCanceledHandler({ event, container }) {
   const notificationModuleService = container.resolve(
-    "notificationModuleService",
+    RESEND_NOTIFICATION_MODULE,
   );
 
   const order = event.data;
