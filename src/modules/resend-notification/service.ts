@@ -1,17 +1,19 @@
 import { Resend } from "resend";
+import { MedusaService } from "@medusajs/framework/utils";
 
 type Options = {
   api_key: string;
   from: string;
 };
 
-export default class ResendNotificationProvider {
+class ResendNotificationService extends MedusaService({}) {
   static identifier = "resend-notification";
 
   protected resend: Resend;
   protected options: Options;
 
   constructor(_, options: Options) {
+    super(_);
     this.options = options;
     this.resend = new Resend(options.api_key);
   }
@@ -34,3 +36,5 @@ export default class ResendNotificationProvider {
     };
   }
 }
+
+export default ResendNotificationService;
