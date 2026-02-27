@@ -7,7 +7,7 @@ type Options = {
 };
 
 class ResendNotificationService extends MedusaService({}) {
-  static identifier = "resend-notification";
+  static identifier = "resend_notification";
 
   protected resend: Resend;
   protected options: Options;
