@@ -15,22 +15,11 @@ const plugins = [];
 
 const modules = [
   {
-    resolve: "@medusajs/notification",
-    options: {
-      providers: [
-        {
-          resolve: "./src/modules/resend-notification",
-          id: "resend",
-          options: {
-            api_key: process.env.RESEND_API_KEY,
-            from: process.env.RESEND_FROM,
-          },
-        },
-      ],
-    },
-  },
-  {
     resolve: "./src/modules/resend-notification",
+    options: {
+      api_key: process.env.RESEND_API_KEY,
+      from: process.env.RESEND_FROM,
+    },
   },
 ];
 
