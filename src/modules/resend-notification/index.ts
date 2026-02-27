@@ -1,4 +1,4 @@
-import ResendNotificationService from "./resend-notification.service";
+import ResendNotificationService from "./service";
 import { Module } from "@medusajs/framework/utils";
 
 export const RESEND_NOTIFICATION_MODULE = "resend-notification";
