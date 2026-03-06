@@ -25,6 +25,25 @@ async function getTemplate(url: string) {
   return cachedTemplate;
 }
 
+function resolveLocale(order: any): "en" | "fr" {
+  const locale = order?.customer?.metadata?.locale;
+
+  if (locale === "fr" || locale === "fr-CA") {
+    return "fr";
+  }
+
+  return "en";
+}
+
+function getTemplateUrl(locale: "en" | "fr") {
+  const map = {
+    en: process.env.ORDER_SHIPPED_TEMPLATE_URL_EN,
+    fr: process.env.ORDER_SHIPPED_TEMPLATE_URL_FR,
+  };
+
+  return map[locale];
+}
+
 export default async function orderShippedHandler({ event, container }) {
   const notificationModuleService = container.resolve(
     RESEND_NOTIFICATION_MODULE,
@@ -33,9 +52,12 @@ export default async function orderShippedHandler({ event, container }) {
   const fulfillment = event.data;
   const order = fulfillment.order;
 
-  const templateUrl = process.env.ORDER_SHIPPED_TEMPLATE_URL;
+  const locale = resolveLocale(order);
+  const templateUrl = getTemplateUrl(locale);
   if (!templateUrl) {
-    console.error("ORDER_SHIPPED_TEMPLATE_URL is not set");
+    console.error(
+      `ORDER_SHIPPED_TEMPLATE_URL_${locale.toUpperCase()} is not set`,
+    );
     return;
   }
 

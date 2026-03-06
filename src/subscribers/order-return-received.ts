@@ -19,6 +19,25 @@ function get(obj: any, path: string) {
   return path.split(".").reduce((acc, part) => acc?.[part], obj);
 }
 
+function resolveLocale(order: any): "en" | "fr" {
+  const locale = order?.customer?.metadata?.locale;
+
+  if (locale === "fr" || locale === "fr-CA") {
+    return "fr";
+  }
+
+  return "en";
+}
+
+function getTemplateUrl(locale: "en" | "fr") {
+  const map = {
+    en: process.env.ORDER_RETURN_RECEIVED_TEMPLATE_URL_EN,
+    fr: process.env.ORDER_RETURN_RECEIVED_TEMPLATE_URL_FR,
+  };
+
+  return map[locale];
+}
+
 function renderTemplate(template: string, data: Record<string, any>) {
   return template.replace(/{{(.*?)}}/g, (_, key) => {
     const value = get(data, key.trim());
@@ -38,10 +57,12 @@ export default async function orderReturnReceivedHandler({ event, container }) {
   const returnObj = event.data;
   const order = returnObj.order;
 
-  // 1. Load template from CDN
-  const templateUrl = process.env.ORDER_RETURN_RECEIVED_TEMPLATE_URL;
+  const locale = resolveLocale(order);
+  const templateUrl = getTemplateUrl(locale);
   if (!templateUrl) {
-    console.error("ORDER_RETURN_RECEIVED_TEMPLATE_URL is not set");
+    console.error(
+      `ORDER_RETURN_RECEIVED_TEMPLATE_URL_${locale.toUpperCase()} is not set`,
+    );
     return;
   }
 

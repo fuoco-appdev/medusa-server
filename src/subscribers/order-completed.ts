@@ -26,6 +26,25 @@ function get(obj: any, path: string) {
   return path.split(".").reduce((acc, part) => acc?.[part], obj);
 }
 
+function resolveLocale(order: any): "en" | "fr" {
+  const locale = order?.customer?.metadata?.locale;
+
+  if (locale === "fr" || locale === "fr-CA") {
+    return "fr";
+  }
+
+  return "en";
+}
+
+function getTemplateUrl(locale: "en" | "fr") {
+  const map = {
+    en: process.env.ORDER_COMPLETED_TEMPLATE_URL_EN,
+    fr: process.env.ORDER_COMPLETED_TEMPLATE_URL_FR,
+  };
+
+  return map[locale];
+}
+
 export default async function orderCompletedHandler({ event, container }) {
   const notificationModuleService = container.resolve(
     RESEND_NOTIFICATION_MODULE,
@@ -33,11 +52,13 @@ export default async function orderCompletedHandler({ event, container }) {
 
   const order = event.data;
 
-  // 1. Load template from CDN
-  const templateUrl = process.env.ORDER_COMPLETED_TEMPLATE_URL;
+  const locale = resolveLocale(order);
+  const templateUrl = getTemplateUrl(locale);
 
   if (!templateUrl) {
-    console.error("ORDER_COMPLETED_TEMPLATE_URL is not set");
+    console.error(
+      `ORDER_COMPLETED_TEMPLATE_URL_${locale.toUpperCase()} is not set`,
+    );
     return;
   }
 
