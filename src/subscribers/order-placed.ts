@@ -53,6 +53,8 @@ export default async function orderPlacedHandler({ event, container }) {
 
   const locale = resolveLocale(order);
   const templateUrl = getTemplateUrl(locale);
+  console.log("templateUrl", templateUrl);
+  console.log("locale", locale);
   if (!templateUrl) {
     console.error(
       `ORDER_PLACED_TEMPLATE_URL_${locale.toUpperCase()} is not set`,
