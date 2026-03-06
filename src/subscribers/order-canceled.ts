@@ -55,7 +55,9 @@ export default async function orderCanceledHandler({ event, container }) {
   const templateUrl = getTemplateUrl(locale);
 
   if (!templateUrl) {
-    console.error("ORDER_CANCELED_TEMPLATE_URL is not set");
+    console.error(
+      `ORDER_CANCELED_TEMPLATE_URL_${locale.toUpperCase()} is not set`,
+    );
     return;
   }
 
